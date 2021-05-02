@@ -1,8 +1,8 @@
-import 'package:awesome_pet/assets.dart';
-import 'package:awesome_pet/constants.dart';
-import 'package:awesome_pet/models/newpet.dart';
-import 'package:awesome_pet/size_config.dart';
-import 'package:awesome_pet/themes.dart';
+import '../assets.dart';
+import '../constants.dart';
+import '../models/newpet.dart';
+import '../size_config.dart';
+import '../themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';

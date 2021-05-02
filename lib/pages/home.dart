@@ -1,10 +1,10 @@
-import 'package:awesome_pet/assets.dart';
-import 'package:awesome_pet/constants.dart';
-import 'package:awesome_pet/models/newpet.dart';
-import 'package:awesome_pet/models/petselection.dart';
-import 'package:awesome_pet/pages/petdetail.dart';
-import 'package:awesome_pet/size_config.dart';
-import 'package:awesome_pet/themes.dart';
+import '../assets.dart';
+import '../constants.dart';
+import '../models/newpet.dart';
+import '../models/petselection.dart';
+import './petdetail.dart';
+import '../size_config.dart';
+import '../themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
