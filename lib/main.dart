@@ -1,5 +1,5 @@
-import 'package:awesome_pet/pages/home.dart';
-import 'package:awesome_pet/themes.dart';
+import './pages/home.dart';
+import './themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
