@@ -104,13 +104,6 @@ class PetDetailPage extends StatelessWidget {
               ),
             ),
             child: Column(children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                _buildInforCon(label: "AGE", value: "${pet.age} Year"),
-                _buildInforCon(
-                    label: "SEX",
-                    value: pet.gender == Gender.male ? "Male" : "Female"),
-                _buildInforCon(label: "WEIGHT", value: "8.5 kg")
-              ]),
               SizedBox(height: getProportionateScreenHeight(14)),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text("Pet Story", style: titleTextStyle),
@@ -170,12 +163,7 @@ class PetDetailPage extends StatelessWidget {
                 )
               ]),
               SizedBox(height: getProportionateScreenHeight(6)),
-              Icon(
-                pet.gender == Gender.male
-                    ? FlutterIcons.male_symbol_fou
-                    : FlutterIcons.female_symbol_fou,
-                color: pet.gender == Gender.male ? primaryColor : Colors.pink,
-              )
+              
             ],
           ),
           Row(

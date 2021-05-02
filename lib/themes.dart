@@ -19,7 +19,7 @@ class Themes {
 TextStyle get headingTextStyle {
   return GoogleFonts.lato(
     textStyle: TextStyle(
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: FontWeight.w600,
         color: Get.isDarkMode ? Colors.white : choclateColor),
   );
@@ -28,7 +28,7 @@ TextStyle get headingTextStyle {
 TextStyle get subHeadingTextStyle {
   return GoogleFonts.lato(
     textStyle: TextStyle(
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: FontWeight.w400,
         color: Get.isDarkMode ? Colors.white : choclateColor),
   );

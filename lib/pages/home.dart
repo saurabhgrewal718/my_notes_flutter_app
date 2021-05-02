@@ -1,3 +1,5 @@
+import 'package:my_notes_app/pages/term.dart';
+
 import '../assets.dart';
 import '../constants.dart';
 import '../models/newpet.dart';
@@ -20,8 +22,8 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             _appBar(),
-            _searchBar(),
-            _petSelection(),
+            // _searchBar(),
+            // _petSelection(),
             _newPet(),
           ],
         ),
@@ -43,10 +45,10 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Newset Pet",
+                      "Ideas",
                       style: subHeadingTextStyle,
                     ),
-                    Icon(Icons.more_horiz, size: 25, color: primaryColor)
+                    Icon(Icons.add, size: 25, color: Colors.white)
                   ]),
             ),
             Expanded(
@@ -67,22 +69,30 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }    
+
+
 
   _petSelection() {
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      height: 80,
-      width: SizeConfig.screenWidth,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: petSelectionList.length,
-        itemBuilder: (context, index) {
-          return _petTile(pet: petSelectionList[index]);
+    return GestureDetector(
+        onTap: (){
+          Get.to(Term());
         },
+        child: Container(
+        margin: EdgeInsets.only(top: 10),
+        height: 80,
+        width: SizeConfig.screenWidth,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: petSelectionList.length,
+          itemBuilder: (context, index) {
+            return _petTile(pet: petSelectionList[index]);
+          },
+        ),
       ),
     );
   }
+
 
   _petTile({PetSelection pet}) {
     return Container(
@@ -121,26 +131,26 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _searchBar() {
-    return Container(
-      height: 45,
-      width: SizeConfig.screenWidth,
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          "Find Your",
-          style: subHeadingTextStyle,
-        ),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(
-            "Awesome Pet",
-            style: headingTextStyle,
-          ),
-          Icon(FlutterIcons.search1_ant, size: 35, color: primaryColor)
-        ])
-      ]),
-    );
-  }
+  // _searchBar() {
+  //   return Container(
+  //     height: 45,
+  //     width: SizeConfig.screenWidth,
+  //     padding: EdgeInsets.symmetric(horizontal: 20),
+  //     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+  //       // Text(
+  //       //   "Find Your",
+  //       //   style: subHeadingTextStyle,
+  //       // ),
+  //       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+  //         Text(
+  //           "Awesome Pet",
+  //           style: headingTextStyle,
+  //         ),
+  //         Icon(FlutterIcons.search1_ant, size: 25, color: primaryColor)
+  //       ])
+  //     ]),
+  //   );
+  // }
 
   _appBar() {
     return Container(
@@ -248,11 +258,7 @@ class PetTile extends StatelessWidget {
               ),
               Text(pet.petType, style: body2TextStyle),
             ]),
-            Icon(
-                pet.gender == Gender.male
-                    ? FlutterIcons.male_symbol_fou
-                    : FlutterIcons.female_symbol_fou,
-                color: pet.gender == Gender.male ? primaryColor : Colors.pink)
+            
           ])
         ]),
       ),
