@@ -1,4 +1,4 @@
-import 'package:awesome_pet/assets.dart';
+import '../assets.dart';
 
 class PetSelection {
   final String petName;

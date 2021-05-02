@@ -1,5 +1,5 @@
-import 'package:awesome_pet/assets.dart';
-import 'package:awesome_pet/constants.dart';
+import '../assets.dart';
+import '../constants.dart';
 
 enum Gender {
   male,
