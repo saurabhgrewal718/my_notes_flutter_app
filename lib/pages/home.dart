@@ -123,7 +123,7 @@ class HomePage extends StatelessWidget {
 
   _searchBar() {
     return Container(
-      height: 95,
+      height: 45,
       width: SizeConfig.screenWidth,
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
