@@ -23,8 +23,9 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             _appBar(),
-            // _searchBar(),
-            // _petSelection(),
+            _searchBar(),
+            _firebaseList(),
+            _petSelection(),
             _newwPet(),
           ],
         ),
@@ -90,7 +91,34 @@ class HomePage extends StatelessWidget {
         ) 
       ),
     );
-  }    
+  }   
+
+
+_firebaseList(){
+  return Container(
+    margin: EdgeInsets.only(top:10),
+    height:80,
+    width: SizeConfig.screenWidth,
+    child: StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('idea/mbntuJJdPYJqLgpsKRdI/messages/')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if(snapshot.connectionState == ConnectionState.waiting){
+          return Center(child: CircularProgressIndicator(),);
+        }
+        final documents = snapshot.data.docs; 
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: documents.length,
+          itemBuilder: (context, index) {
+            return _petTile(pet: petSelectionList[index]);
+          },
+        );
+      }
+    ),
+  );
+} 
 
 
 
@@ -152,26 +180,26 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // _searchBar() {
-  //   return Container(
-  //     height: 45,
-  //     width: SizeConfig.screenWidth,
-  //     padding: EdgeInsets.symmetric(horizontal: 20),
-  //     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-  //       // Text(
-  //       //   "Find Your",
-  //       //   style: subHeadingTextStyle,
-  //       // ),
-  //       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-  //         Text(
-  //           "Awesome Pet",
-  //           style: headingTextStyle,
-  //         ),
-  //         Icon(FlutterIcons.search1_ant, size: 25, color: primaryColor)
-  //       ])
-  //     ]),
-  //   );
-  // }
+  _searchBar() {
+    return Container(
+      height: 45,
+      width: SizeConfig.screenWidth,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        // Text(
+        //   "Find Your",
+        //   style: subHeadingTextStyle,
+        // ),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            "Awesome Pet",
+            style: headingTextStyle,
+          ),
+          Icon(FlutterIcons.search1_ant, size: 25, color: primaryColor)
+        ])
+      ]),
+    );
+  }
 
   _appBar() {
     return Container(
