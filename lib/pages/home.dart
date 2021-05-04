@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_notes_app/pages/term.dart';
 
 import '../assets.dart';
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
             _appBar(),
             // _searchBar(),
             // _petSelection(),
-            _newPet(),
+            _newwPet(),
           ],
         ),
       ),
@@ -67,6 +68,26 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }    
+
+
+  _newwPet() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(top: 10),
+        width: SizeConfig.screenWidth,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: ElevatedButton(
+          child: Text("Press me"),
+          onPressed: (){
+            FirebaseFirestore.instance.collection('idea/mbntuJJdPYJqLgpsKRdI/messages/')
+            .snapshots().listen((event) {
+              print(event);
+            });
+          },
+        ) 
       ),
     );
   }    
