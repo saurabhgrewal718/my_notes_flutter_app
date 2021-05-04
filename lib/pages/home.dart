@@ -83,9 +83,8 @@ class HomePage extends StatelessWidget {
         child: ElevatedButton(
           child: Text("Press me"),
           onPressed: (){
-            FirebaseFirestore.instance.collection('idea/mbntuJJdPYJqLgpsKRdI/messages/')
-            .snapshots().listen((event) {
-              print(event);
+            FirebaseFirestore.instance.collection('idea/mbntuJJdPYJqLgpsKRdI/messages/').add({
+              'idea':'this is a new idea sirjee!'
             });
           },
         ) 
@@ -109,10 +108,10 @@ _firebaseList(){
         }
         final documents = snapshot.data.docs; 
         return ListView.builder(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           itemCount: documents.length,
           itemBuilder: (context, index) {
-            return _petTile(pet: petSelectionList[index]);
+            return Text(documents[index]['idea']);
           },
         );
       }
