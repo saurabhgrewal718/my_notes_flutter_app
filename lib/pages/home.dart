@@ -24,9 +24,9 @@ class HomePage extends StatelessWidget {
           children: [
             _appBar(),
             _searchBar(),
-            _firebaseList(),
-            // _petSelection(),
-            _newwPet(),
+            // _firebaseList(),
+            _petSelection(),
+            _newPet(),
           ],
         ),
       ),
@@ -93,95 +93,83 @@ class HomePage extends StatelessWidget {
   }   
 
 
-_firebaseList(){
-  return Container(
-    margin: EdgeInsets.only(top:10),
-    height:80,
-    width: SizeConfig.screenWidth,
-    child: StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('idea/mbntuJJdPYJqLgpsKRdI/messages/')
-          .snapshots(),
-      builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting){
-          return Center(child: CircularProgressIndicator(),);
-        }
-        final documents = snapshot.data.docs; 
-        return ListView.builder(
+// _firebaseList(){
+//   return Container(
+//     margin: EdgeInsets.only(top:10),
+//     height:80,
+//     width: SizeConfig.screenWidth,
+//     child: StreamBuilder(
+//       stream: FirebaseFirestore.instance
+//           .collection('idea/mbntuJJdPYJqLgpsKRdI/messages/')
+//           .snapshots(),
+//       builder: (context, snapshot) {
+//         if(snapshot.connectionState == ConnectionState.waiting){
+//           return Center(child: CircularProgressIndicator(),);
+//         }
+//         final documents = snapshot.data.docs; 
+//         return ListView.builder(
+//           scrollDirection: Axis.horizontal,
+//           itemCount: documents.length,
+//           itemBuilder: (context, index) {
+//             return _petTile(documents[index]['idea'],documents[index]['img'],documents[index]['selected']);
+//           },
+//         );
+//       }
+//     ),
+//   );
+// } 
+
+
+// _firebaseList(){
+//   return Container(
+//     margin: EdgeInsets.only(top:10),
+//     height:80,
+//     width: SizeConfig.screenWidth,
+//     child: StreamBuilder(
+//       stream: FirebaseFirestore.instance
+//           .collection('idea/mbntuJJdPYJqLgpsKRdI/messages/')
+//           .snapshots(),
+//       builder: (context, snapshot) {
+//         if(snapshot.connectionState == ConnectionState.waiting){
+//           return Center(child: CircularProgressIndicator(),);
+//         }
+//         final documents = snapshot.data.docs; 
+//         return ListView.builder(
+//           scrollDirection: Axis.horizontal,
+//           itemCount: documents.length,
+//           itemBuilder: (context, index) {
+//             return _petTile(documents[index]['idea'],documents[index]['img'],documents[index]['selected']);
+//           },
+//         );
+//       }
+//     ),
+//   );
+// } 
+
+
+
+  _petSelection() {
+    return GestureDetector(
+        onTap: (){
+          Get.to(Term());
+        },
+        child: Container(
+        margin: EdgeInsets.only(top: 10),
+        height: 80,
+        width: SizeConfig.screenWidth,
+        child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: documents.length,
+          itemCount: petSelectionList.length,
           itemBuilder: (context, index) {
-            return _petTile(documents[index]['idea'],documents[index]['img'],documents[index]['selected']);
+            return _petTile(pet: petSelectionList[index]);
           },
-        );
-      }
-    ),
-  );
-} 
-
-
-
-  // _petSelection() {
-  //   return GestureDetector(
-  //       onTap: (){
-  //         Get.to(Term());
-  //       },
-  //       child: Container(
-  //       margin: EdgeInsets.only(top: 10),
-  //       height: 80,
-  //       width: SizeConfig.screenWidth,
-  //       child: ListView.builder(
-  //         scrollDirection: Axis.horizontal,
-  //         itemCount: petSelectionList.length,
-  //         itemBuilder: (context, index) {
-  //           return _petTile(pet: petSelectionList[index]);
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
-
-
-  _petTile(idea,img,selected) {
-    return Container(
-      margin: EdgeInsets.only(left: 10),
-      width: SizeConfig.screenWidth * 0.4,
-      child: Stack(
-        children: [
-          Positioned(
-              bottom: 0,
-              child: Container(
-                height: 60,
-                width: SizeConfig.screenWidth * 0.4,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: selected
-                        ? primaryColor
-                        : Get.isDarkMode
-                            ? liteGreyColor
-                            : Colors.white
-                    ),
-              )),
-          Positioned(
-            left: 0,
-            bottom: 0,
-            child: Image.network(img, height: 80),
-          ),
-          Positioned(
-            bottom: 12,
-            right: 16,
-            child: Text(idea,
-                style: selected
-                    ? titleTextStyle.copyWith(color: Colors.white)
-                    : titleTextStyle),
-          ),
-        ],
+        ),
       ),
     );
   }
 
 
-  // _petTile({PetSelection pet}) {
+  // _petTile(idea,img,selected) {
   //   return Container(
   //     margin: EdgeInsets.only(left: 10),
   //     width: SizeConfig.screenWidth * 0.4,
@@ -194,22 +182,23 @@ _firebaseList(){
   //               width: SizeConfig.screenWidth * 0.4,
   //               decoration: BoxDecoration(
   //                   borderRadius: BorderRadius.circular(10),
-  //                   color: pet.isSelected
+  //                   color: selected
   //                       ? primaryColor
   //                       : Get.isDarkMode
   //                           ? liteGreyColor
-  //                           : Colors.white),
+  //                           : Colors.white
+  //                   ),
   //             )),
   //         Positioned(
   //           left: 0,
   //           bottom: 0,
-  //           child: Image.asset(pet.imgPath, height: 80),
+  //           child: Image.network(img, height: 80),
   //         ),
   //         Positioned(
   //           bottom: 12,
   //           right: 16,
-  //           child: Text(pet.petName,
-  //               style: pet.isSelected
+  //           child: Text(idea,
+  //               style: selected
   //                   ? titleTextStyle.copyWith(color: Colors.white)
   //                   : titleTextStyle),
   //         ),
@@ -217,6 +206,44 @@ _firebaseList(){
   //     ),
   //   );
   // }
+
+
+  _petTile({PetSelection pet}) {
+    return Container(
+      margin: EdgeInsets.only(left: 10),
+      width: SizeConfig.screenWidth * 0.4,
+      child: Stack(
+        children: [
+          Positioned(
+              bottom: 0,
+              child: Container(
+                height: 60,
+                width: SizeConfig.screenWidth * 0.4,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: pet.isSelected
+                        ? primaryColor
+                        : Get.isDarkMode
+                            ? liteGreyColor
+                            : Colors.white),
+              )),
+          Positioned(
+            left: 0,
+            bottom: 0,
+            child: Image.asset(pet.imgPath, height: 80),
+          ),
+          Positioned(
+            bottom: 12,
+            right: 16,
+            child: Text(pet.petName,
+                style: pet.isSelected
+                    ? titleTextStyle.copyWith(color: Colors.white)
+                    : titleTextStyle),
+          ),
+        ],
+      ),
+    );
+  }
 
 
 
@@ -281,7 +308,7 @@ _firebaseList(){
 class PetTile extends StatelessWidget {
   final Pet pet;
   PetTile({this.pet});
-
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
