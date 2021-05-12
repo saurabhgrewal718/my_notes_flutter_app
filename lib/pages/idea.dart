@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../themes.dart';
 
 
 class Idea extends StatefulWidget {
-  static const routeName = './idea';
   @override
   _IdeaState createState() => _IdeaState();
 }
@@ -54,165 +54,42 @@ class _IdeaState extends State<Idea> {
                   children: <Widget>[
                     
                     SizedBox(height: 30,),
-                    
                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Email', style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black87
-                          ),),
-                          SizedBox(height: 5,),
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value){
-                              if(value.isEmpty || !value.contains('@') || !value.contains('.com') || value.length <10){
-                                return "Enter valid Email";
-                              }
-                              return null;
-                            },
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('Enter your Idea', style: subHeadingTextStyle),
+                        SizedBox(height: 5,),
+                        TextFormField(
+                          validator: (value){
+                            if(value.isEmpty || value.length <4){
+                              return "Idea Must have Alteast 4 Characters";
+                            }
+                            return null;
+                          },
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey[400])
                             ),
-                            onFieldSubmitted: (_){
-                              FocusScope.of(context).requestFocus(_username);
-                            },
-                            onSaved: (value){
-                              _email=value;
-                            },
-                          ),
-                          SizedBox(height: 30,),
-                        ],
-                      ),
-                    ),
-                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Username', style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black87
-                          ),),
-                          SizedBox(height: 5,),
-                          TextFormField(
-                            validator: (value){
-                              if(value.isEmpty || value.length <4){
-                                return "Username Must have Alteast 4 Characters";
-                              }
-                              return null;
-                            },
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey[400])
                             ),
-                            focusNode: _username,
-                            onFieldSubmitted: (_){
-                              FocusScope.of(context).requestFocus(_pass);
-                            },
-                            onSaved: (value){
-                              _usrname=value;
-                            },
                           ),
-                          SizedBox(height: 30,),
-                        ],
-                      ),
+                          focusNode: _username,
+                          onFieldSubmitted: (_){
+                            FocusScope.of(context).requestFocus(_pass);
+                          },
+                          onSaved: (value){
+                            _usrname=value;
+                          },
+                        ),
+                        SizedBox(height: 30,),
+                      ],
                     ),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Password', style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black87
-                          ),),
-                          SizedBox(height: 5,),
-                          TextFormField(
-                            controller: _passw,
-                            validator: (value){
-                              if(value.isEmpty || value.length<6){
-                                return "Enter atleast 6 Characters";
-                              }
-                              return null;
-                            },
-                            focusNode: _pass,
-                            obscureText: true,
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
-                            ),
-                            onFieldSubmitted: (_){
-                              FocusScope.of(context).requestFocus(_confirmpass);
-                            },
-                            onSaved: (value){
-                              _password=value;
-                            },
-                          ),
-                          SizedBox(height: 30,),
-                        ],
-                      ),
-                    ),
-                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Confirm Password', style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black87
-                          ),),
-                          SizedBox(height: 5,),
-                          TextFormField(
-                            controller:_confirmPass,
-                            validator: (value){
-                              if(value.isEmpty || value.length<6 || value!=_passw.text){
-                                return "Passwords Don't match!";
-                              }
-                              return null;
-                            },
-                            focusNode: _confirmpass,
-                            obscureText: true,
-                            textInputAction: TextInputAction.done,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey[400])
-                              ),
-                            ),
-                            onFieldSubmitted: (_){
-                              FocusScope.of(context).unfocus();
-                            },
-                            
-                          ),
-                          SizedBox(height: 60,),
-                        ],
-                      ),
-                    ),
+                  ),
+                  
                     _isLoading ? Center(child:CircularProgressIndicator(backgroundColor: Colors.greenAccent)) : Container(
                       padding: EdgeInsets.only(top: 3, left: 3),
                       decoration: BoxDecoration(
@@ -235,9 +112,10 @@ class _IdeaState extends State<Idea> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)
                         ),
-                        child: Text("SignUp", style: TextStyle(
+                        child: Text("Add Idea", style: TextStyle(
                           fontWeight: FontWeight.w600, 
-                          fontSize: 18
+                          fontSize: 18,
+                          color: Colors.black45
                         ),),
                       ),
                     ),           

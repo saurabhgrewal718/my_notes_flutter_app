@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_notes_app/pages/components/new_idea.dart';
 import 'package:my_notes_app/pages/idea.dart';
 import 'package:my_notes_app/pages/term.dart';
 
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             _appBar(),
-            _searchBar(),
+            New_Idea(),
             // _firebaseList(),
             _petSelection(),
             _newPet(),
@@ -41,21 +42,7 @@ class HomePage extends StatelessWidget {
         margin: EdgeInsets.only(top: 10),
         width: SizeConfig.screenWidth,
         padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Ideas",
-                      style: subHeadingTextStyle,
-                    ),
-                    Icon(Icons.add, size: 25, color: Colors.white)
-                  ]),
-            ),
-            Expanded(
+        child:  Expanded(
               child: Container(
                 child: StaggeredGridView.countBuilder(
                   crossAxisCount: 4,
@@ -69,8 +56,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
       ),
     );
   }    
@@ -249,7 +234,7 @@ class HomePage extends StatelessWidget {
 
 
 
-  _searchBar(BuildContext context) {
+  _searchBar() {
     return Container(
       height: 45,
       width: SizeConfig.screenWidth,
@@ -268,12 +253,10 @@ class HomePage extends StatelessWidget {
             icon: Icon(
               Icons.add,
             ),
-            iconSize: 50,
+            iconSize: 25,
             color: Colors.green,
             splashColor: Colors.purple,
-            onPressed: () {
-              Navigator.of(context).pushNamed(Idea.routeName);
-            },
+            onPressed: () {},
           )
         ])
       ]),

@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:my_notes_app/pages/idea.dart';
+import 'package:my_notes_app/pages/idea_form_container.dart';
 
 import './pages/home.dart';
 import './themes.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         HomePage.routeName: (ctx) => HomePage(),
-        Idea.routeName: (ctx) => Idea(),
+        Idea_form_container.routeName: (ctx) => Idea_form_container(),
 
       },
       onUnknownRoute: (settings){
