@@ -12,23 +12,38 @@ class Idea extends StatefulWidget {
 class _IdeaState extends State<Idea> {
   // final _auth = FirebaseAuth.instance;
   final _form = GlobalKey<FormState>();
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
   DateTime currentDate = DateTime.now();
   String _idea = '';
   DateTime _date;
   String _formattedDate='';
   String _formattedTime='';
+  String _futureDate='';
   var _isLoading= false;
 
   @override
   void _saveForm() async{
-    _form.currentState.validate();
-    FocusScope.of(context).unfocus();
-    _form.currentState.save();
-    print(_idea);
-    print(_formattedDate);
-    print(_formattedTime);
-    Navigator.of(context).pop();
-
+    final isValid = _form.currentState.validate();
+    if(isValid){
+      setState(() {
+        _isLoading= true;
+      });
+      try{
+        FocusScope.of(context).unfocus();
+        _form.currentState.save();
+        print(_idea);
+        print(_formattedDate);
+        print(_formattedTime);
+        print(_futureDate);
+        print(_time);
+        Navigator.of(context).pop();
+        setState(() {
+          _isLoading= false;
+        });  
+      }catch(err){
+          print(err);
+      }
+    }
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -40,7 +55,20 @@ class _IdeaState extends State<Idea> {
     if (pickedDate != null && pickedDate != currentDate)
       setState(() {
         currentDate = pickedDate;
+        _futureDate = DateFormat('yyyy-MM-dd').format(currentDate);
       });
+  }
+
+    void _selectTime() async {
+    final TimeOfDay newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
   }
 
   @override
@@ -56,8 +84,6 @@ class _IdeaState extends State<Idea> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    
-                    SizedBox(height: 30,),
                     Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +117,7 @@ class _IdeaState extends State<Idea> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(currentDate.toString()),
+                            Text(currentDate.toString(),style: body2TextStyle),
                             MaterialButton(
                               onPressed: () => _selectDate(context),
                               color: Colors.greenAccent,
@@ -108,6 +134,30 @@ class _IdeaState extends State<Idea> {
                           ],
                         ),
                         SizedBox(height: 30,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(height: 8),
+                            Text(
+                              'Selected time: ${_time.format(context)}',
+                              style: body2TextStyle
+                            ),
+                            MaterialButton(
+                              onPressed: _selectTime,
+                              color: Colors.greenAccent,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)
+                              ),
+                              child: Text("Select Time", style: TextStyle(
+                                fontWeight: FontWeight.w600, 
+                                fontSize: 14,
+                                color: Colors.black45
+                              ),),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 50,),
                       ],
                     ),
                   ),
@@ -150,8 +200,3 @@ class _IdeaState extends State<Idea> {
       );
   }
 }
-
-
-
-
-
