@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
             _appBar(),
             New_Idea(),
             // _firebaseList(),
-            _petSelection(),
+            // _petSelection(),
             _newPet(),
           ],
         ),
