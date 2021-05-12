@@ -10,31 +10,17 @@ class Idea extends StatefulWidget {
 
 class _IdeaState extends State<Idea> {
   // final _auth = FirebaseAuth.instance;
-  final _username = FocusNode();
-  final _pass = FocusNode();
-  final _confirmpass = FocusNode();
   final _form = GlobalKey<FormState>();
-  final TextEditingController _passw = TextEditingController();
-  final TextEditingController _confirmPass = TextEditingController();
-  String _email='';
-  String _password = '';
-  String _usrname = '';
+  String _idea = '';
   var _isLoading= false;
 
   @override
-  void dispose() {
-    _username.dispose();
-    _pass.dispose();
-    _confirmpass.dispose();
-    super.dispose();
-  }
-
   void _saveForm() async{
-    
     _form.currentState.validate();
     FocusScope.of(context).unfocus();
     _form.currentState.save();
-    Navigator.of(context).pop();
+    print(_idea);
+    // Navigator.of(context).pop();
 
   }
 
@@ -77,12 +63,8 @@ class _IdeaState extends State<Idea> {
                               borderSide: BorderSide(color: Colors.grey[400])
                             ),
                           ),
-                          focusNode: _username,
-                          onFieldSubmitted: (_){
-                            FocusScope.of(context).requestFocus(_pass);
-                          },
                           onSaved: (value){
-                            _usrname=value;
+                            _idea=value;
                           },
                         ),
                         SizedBox(height: 30,),
