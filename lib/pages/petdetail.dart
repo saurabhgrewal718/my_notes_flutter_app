@@ -156,9 +156,9 @@ class PetDetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(pet.petName, style: titleTextStyle),
+                Text(pet.idea, style: titleTextStyle),
                 Text(
-                  pet.petType,
+                  pet.formattedDate,
                   style: body2TextStyle,
                 )
               ]),
@@ -190,7 +190,7 @@ class PetDetailPage extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(20, 50, 20, 0),
             width: SizeConfig.screenWidth,
             height: SizeConfig.screenHeight * 0.4,
-            child: Image.asset(pet.imgPath),
+            child: Text(pet.futureDate),
           ),
           Positioned(
             left: getProportionateScreenWidth(16),

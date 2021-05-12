@@ -1,81 +1,59 @@
 import '../assets.dart';
 import '../constants.dart';
 
-enum Gender {
-  male,
-  female,
-}
 
 class Pet {
-  final String petName;
-  final String petType;
-  final String imgPath;
-  final bool isFavorite;
-  final String petStory;
+  final String idea;
+  final String formattedDate;
+  final String formattedTime;
+  final String futureDate;
+  final String time;
 
   Pet(
-      {this.petName,
-      this.petType,
-      this.imgPath,
-      this.isFavorite,
-      this.petStory});
+      {this.idea,
+      this.formattedDate,
+      this.formattedTime,
+      this.futureDate,
+      this.time});
 }
 
 List<Pet> petList = [
   Pet(
-    petName: "Oliver,",
-    imgPath: Asset.cat1,
-    isFavorite: true,
-    petType: "Munchkin",
-    petStory: catDes1,
+    idea : "Oliver,",
+    formattedDate: "Asset.cat1",
+    formattedTime: "true",
+    futureDate: "Munchkin",
+    time: "catDes1",
   ),
   Pet(
-    petName: "Oscar,",
-    imgPath: Asset.cat2,
-    isFavorite: false,
-    petType: "Munchkin",
-    petStory: catDes2,
+    idea : "Oliver,",
+    formattedDate: "Asset.cat1",
+    formattedTime: "true",
+    futureDate: "Munchkin",
+    time: "catDes1",
+  ),Pet(
+    idea : "Oliver,",
+    formattedDate: "Asset.cat1",
+    formattedTime: "true",
+    futureDate: "Munchkin",
+    time: "catDes1",
+  ),Pet(
+    idea : "Oliver,",
+    formattedDate: "Asset.cat1",
+    formattedTime: "true",
+    futureDate: "Munchkin",
+    time: "catDes1",
+  ),Pet(
+    idea : "Oliver,",
+    formattedDate: "Asset.cat1",
+    formattedTime: "true",
+    futureDate: "Munchkin",
+    time: "catDes1",
+  ),Pet(
+    idea : "Oliver,",
+    formattedDate: "Asset.cat1",
+    formattedTime: "true",
+    futureDate: "Munchkin",
+    time: "catDes1",
   ),
-  Pet(
-    petName: "Dextoer",
-    imgPath: Asset.cat3,
-    isFavorite: true,
-    petType: "Munchkin",
-    petStory: catDes3,
-  ),
-  Pet(
-    petName: "Kitty",
-    imgPath: Asset.cat4,
-    isFavorite: true,
-    petType: "Munchkin",
-    petStory: catDes4,
-  ),
-  Pet(
-    petName: "Oliver,",
-    imgPath: Asset.cat1,
-    isFavorite: true,
-    petType: "Munchkin",
-    petStory: catDes1,
-  ),
-  Pet(
-    petName: "Oliver,",
-    imgPath: Asset.cat1,
-    isFavorite: true,
-    petType: "Munchkin",
-    petStory: catDes1,
-  ),
-  Pet(
-    petName: "Oliver,",
-    imgPath: Asset.cat1,
-    isFavorite: true,
-    petType: "Munchkin",
-    petStory: catDes1,
-  ),
-  Pet(
-    petName: "Oliver,",
-    imgPath: Asset.cat1,
-    isFavorite: true,
-    petType: "Munchkin",
-    petStory: catDes1,
-  )
 ];

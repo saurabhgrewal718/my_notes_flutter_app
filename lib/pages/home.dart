@@ -346,16 +346,18 @@ class PetTile extends StatelessWidget {
                         ),
                         child: Icon(
                           FlutterIcons.heart_fou,
-                          color: pet.isFavorite ? Colors.red : greyColor,
+                          color: Colors.red,
                         )),
                   ),
                   Positioned(
                       bottom: 0,
-                      child: Image.asset(
-                        pet.imgPath,
-                        height: 120,
-                        fit: BoxFit.scaleDown,
-                      ))
+                      child:
+                      //  Image.asset(
+                      //   pet.idea,
+                      //   height: 120,
+                      //   fit: BoxFit.scaleDown,
+                      Text("idea")
+                      ),
                 ],
               ),
             ),
@@ -364,10 +366,10 @@ class PetTile extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Column(children: [
               Text(
-                pet.petName,
+                pet.idea,
                 style: titleTextStyle,
               ),
-              Text(pet.petType, style: body2TextStyle),
+              Text(pet.formattedDate, style: body2TextStyle),
             ]),
             
           ])
