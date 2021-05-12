@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import '../themes.dart';
 
 
@@ -11,8 +12,11 @@ class Idea extends StatefulWidget {
 class _IdeaState extends State<Idea> {
   // final _auth = FirebaseAuth.instance;
   final _form = GlobalKey<FormState>();
+  DateTime currentDate = DateTime.now();
   String _idea = '';
-  String _date = '';
+  DateTime _date;
+  String _formattedDate='';
+  String _formattedTime='';
   var _isLoading= false;
 
   @override
@@ -21,11 +25,23 @@ class _IdeaState extends State<Idea> {
     FocusScope.of(context).unfocus();
     _form.currentState.save();
     print(_idea);
-    print(_date);
-    // Navigator.of(context).pop();
+    print(_formattedDate);
+    print(_formattedTime);
+    Navigator.of(context).pop();
 
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime pickedDate = await showDatePicker(
+        context: context,
+        initialDate: currentDate,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2050));
+    if (pickedDate != null && pickedDate != currentDate)
+      setState(() {
+        currentDate = pickedDate;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +82,31 @@ class _IdeaState extends State<Idea> {
                           ),
                           onSaved: (value){
                             _idea=value;
-                            _date=DateTime.now().toString();
+                            _date=DateTime.now();
+                            _formattedDate = DateFormat('yyyy-MM-dd').format(_date);
+                            _formattedTime = DateFormat('kk:mm').format(_date);
                           },
                         ),
-
+                        SizedBox(height: 30,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(currentDate.toString()),
+                            MaterialButton(
+                              onPressed: () => _selectDate(context),
+                              color: Colors.greenAccent,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)
+                              ),
+                              child: Text("Select Date", style: TextStyle(
+                                fontWeight: FontWeight.w600, 
+                                fontSize: 14,
+                                color: Colors.black45
+                              ),),
+                            ),
+                          ],
+                        ),
                         SizedBox(height: 30,),
                       ],
                     ),
