@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_notes_app/pages/idea.dart';
 import 'package:my_notes_app/pages/term.dart';
 
 import '../assets.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  static const routeName = './home';
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -247,7 +249,7 @@ class HomePage extends StatelessWidget {
 
 
 
-  _searchBar() {
+  _searchBar(BuildContext context) {
     return Container(
       height: 45,
       width: SizeConfig.screenWidth,
@@ -262,7 +264,17 @@ class HomePage extends StatelessWidget {
             "Awesome Pet",
             style: headingTextStyle,
           ),
-          Icon(FlutterIcons.search1_ant, size: 25, color: primaryColor)
+          IconButton(
+            icon: Icon(
+              Icons.add,
+            ),
+            iconSize: 50,
+            color: Colors.green,
+            splashColor: Colors.purple,
+            onPressed: () {
+              Navigator.of(context).pushNamed(Idea.routeName);
+            },
+          )
         ])
       ]),
     );
