@@ -12,6 +12,7 @@ class _IdeaState extends State<Idea> {
   // final _auth = FirebaseAuth.instance;
   final _form = GlobalKey<FormState>();
   String _idea = '';
+  String _date = '';
   var _isLoading= false;
 
   @override
@@ -20,6 +21,7 @@ class _IdeaState extends State<Idea> {
     FocusScope.of(context).unfocus();
     _form.currentState.save();
     print(_idea);
+    print(_date);
     // Navigator.of(context).pop();
 
   }
@@ -44,9 +46,8 @@ class _IdeaState extends State<Idea> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Enter your Idea', style: subHeadingTextStyle),
-                        SizedBox(height: 5,),
                         TextFormField(
+                          maxLines: 10,
                           validator: (value){
                             if(value.isEmpty || value.length <4){
                               return "Idea Must have Alteast 4 Characters";
@@ -55,7 +56,7 @@ class _IdeaState extends State<Idea> {
                           },
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey[400])
                             ),
@@ -65,8 +66,10 @@ class _IdeaState extends State<Idea> {
                           ),
                           onSaved: (value){
                             _idea=value;
+                            _date=DateTime.now().toString();
                           },
                         ),
+
                         SizedBox(height: 30,),
                       ],
                     ),
